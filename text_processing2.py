@@ -2,7 +2,6 @@
 # Test Processing II  #
 #######################
 
-
 def digits_to_words(input_string):
     """
     인풋으로 받는 스트링에서 숫자만 추출하여 영어 단어로 변환하여 단어들이 연결된 스트링을 반환함
@@ -28,8 +27,13 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
-    return digit_string
+    num_dict = {'0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
+                '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine'}
+    digit_string = []
+    for c in input_string:
+        if c in num_dict:
+            digit_string.append(num_dict[c])
+    return ' '.join(digit_string)
 
 
 """
@@ -64,5 +68,14 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
-    return camelcase_str
+    camelcase_str = ""
+    parted_list = underscore_str.split('_')
+    parted_list = [e for e in parted_list if e != '']
+    if len(parted_list) <= 1: return ''.join(parted_list)
+    else:
+        for i, s in enumerate(parted_list):
+            if i == 0:
+                camelcase_str += s.lower()
+            else:
+                camelcase_str = camelcase_str + s.title()
+        return camelcase_str
